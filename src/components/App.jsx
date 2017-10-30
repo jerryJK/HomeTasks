@@ -1,19 +1,39 @@
 import React, {Component} from 'react';
-import { bindActionCreators} from 'redux';
-import { } from '../actions';
-
+import {firebaseApp} from '../firebase';
+import {connect} from 'react-redux';
+import AddTask from './AddTask.jsx';
 
 
 class App extends Component {
 
+  signOut() {
+    firebaseApp.auth().signOut();
+  }
+
     render() {
+      //  console.log('this.props state', this.props.state);
         return (
             <div className="app">
-                HomeTasks
+                <h3>Home Tasks</h3>
+                <AddTask />
+                <div>Tasks list</div>
+                <button
+                  className="btn ntn-danger"
+                  onClick={() => this.signOut()}
+                >
+                  SignOut
+                </button>
             </div>
         )
     }
 }
 
+function mapStateToProps(state) {
+    console.log('state', state);
+    return {
+      state
+    }
+}
 
-export default App;
+
+export default connect(mapStateToProps, null)(App);
