@@ -12,6 +12,7 @@ class AddTask extends Component {
 
   addTask(){
     console.log('this.state', this.state);
+    console.log('this.props', this.props);
     const {title} = this.state;
     const {email} = this.props;
     taskRef.push({email, title});
