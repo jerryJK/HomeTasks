@@ -1,14 +1,9 @@
-import {SIGNED_IN} from '../constants';
+import {combineReducers} from 'redux';
+import user from './reducer_user';
+import tasks from './reducer_tasks';
 
-let user = {
-  email: null
-}
 
-export default (state = user, action) => {
-  switch(action.type){
-    case SIGNED_IN:
-      return {...state, email: action.email}
-    default:
-      return state;
-  }
-}
+export default combineReducers({
+  user,
+  tasks
+})
