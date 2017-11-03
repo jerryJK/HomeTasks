@@ -14,12 +14,16 @@ class App extends Component {
     render() {
       //  console.log('this.props state', this.props.state);
         return (
-            <div className="app">
+            <div className="app" style={{margin:'10px'}}>
                 <h3>Home Tasks</h3>
+                <br />
                 <AddTask />
+                <hr />
+                <h4>Tasks to do</h4>
                 <TasksList />
+                <hr />
                 <button
-                  className="btn ntn-danger"
+                  className="btn btn-danger"
                   onClick={() => this.signOut()}
                 >
                   SignOut
@@ -30,7 +34,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log('state', state);
+    // console.log('state', state);
     return {}
 }
 

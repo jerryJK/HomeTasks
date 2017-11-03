@@ -14,12 +14,12 @@ import styles from './index.scss';
 
 firebaseApp.auth().onAuthStateChanged(user => {
   if(user) {
-    console.log('user has signed in', user);
+    // console.log('user has signed in', user);
     browserHistory.push('/app');
     const {email} = user;
     store.dispatch(logUser(email));
   } else {
-    console.log('user has signed out or still need to sign in');
+    // console.log('user has signed out or still need to sign in');
     browserHistory.replace('/signin');
   }
 })

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {taskRef} from '../firebase';
 import {setTasks} from '../actions';
+import TaskItem from './TaskItem';
 
 class TasksList extends Component {
 
@@ -18,12 +19,21 @@ class TasksList extends Component {
   }
 
 
-    render() {
-      console.log('this.props.tasks', this.props.tasks);
-      return (
-        <div>TasksList</div>
-      )
-    }
+render() {
+    console.log('this.props.tasks', this.props.tasks);
+    return (
+        <div>
+            {
+              this.props.tasks.map((task, index) => {
+                return (
+                    <TaskItem key={index} task={task}/>
+                )
+              })
+            }
+        </div>
+    )
+}
+
 }
 
 function mapStateToProps(state) {

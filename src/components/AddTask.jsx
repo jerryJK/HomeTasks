@@ -27,6 +27,7 @@ class AddTask extends Component {
             onChange={event => this.setState({title: event.target.value})}
           />
           <button
+            style={{margin:'5px'}}
             className="btn btn-success"
             type="button"
             onClick={() => this.addTask()}
