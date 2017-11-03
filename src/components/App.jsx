@@ -3,6 +3,7 @@ import {firebaseApp} from '../firebase';
 import {connect} from 'react-redux';
 import AddTask from './AddTask.jsx';
 import TasksList from './TasksList.jsx';
+import CompleteTaskList from './CompleteTaskList';
 
 
 class App extends Component {
@@ -21,6 +22,9 @@ class App extends Component {
                 <hr />
                 <h4>Tasks to do</h4>
                 <TasksList />
+                <hr />
+                <h4>Completed Tasks</h4>
+                <CompleteTaskList />
                 <hr />
                 <button
                   className="btn btn-danger"

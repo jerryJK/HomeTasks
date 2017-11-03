@@ -11,7 +11,8 @@ class TasksList extends Component {
       let tasks = [];
       snapshot.forEach(task => {
         const {email, title} = task.val();
-        tasks.push({email, title});
+        const serverKey = task.key;
+        tasks.push({email, title, serverKey});
       })
       // console.log(tasks);
       this.props.setTasks(tasks);
