@@ -9,6 +9,7 @@ import {logUser} from './actions';
 import App from './components/App';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import ForgotPassword from './components/ForgotPassword';
 import styles from './index.scss';
 
 
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
             <Route path="/app" component={App} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
+            <Route path="/forgot_password" component={ForgotPassword} />
           </Router>
         </Provider>,
         document.getElementById('root')

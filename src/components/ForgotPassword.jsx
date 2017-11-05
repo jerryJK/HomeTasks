@@ -8,26 +8,33 @@ class SignUp extends Component {
     super(props);
     this.state = {
       email: '',
-      password: '',
+      reset: false,
       error: {
         message: ''
       }
     }
   }
 
-  signUp() {
-    console.log("this state", this.state);
-    const {email, password} = this.state;
-    firebaseApp.auth().createUserWithEmailAndPassword(email, password)
-      .catch(error => {
-        this.setState({error})
+  resetPassword() {
+    // console.log("this state", this.state);
+    const {email} = this.state;
+    firebaseApp.auth().sendPasswordResetEmail(email)
+    .then(() => {
+      this.setState({
+        reset: true
       })
+      // Password reset email sent.
+    })
+    .catch((error) => {
+      // Error occurred. Inspect error.code.
+      this.setState({error})
+    });
   }
 
     render() {
         return (
             <div className="form-inline" style={{margin:'10px'}}>
-              <h2>Sign Up</h2>
+              <h2>Reset password</h2>
               <div className="form-group">
                 <input
                   className="form-control"
@@ -35,22 +42,17 @@ class SignUp extends Component {
                   placeholder="email"
                   onChange={event => this.setState({email: event.target.value})}
                 />
-                <input
-                  className="form-control"
-                  type="password"
-                  placeholder="password"
-                  onChange={event => this.setState({password: event.target.value})}
-                />
                 <button
                   className="btn btn-primary"
                   type="text"
-                  onClick={() => this.signUp()}
+                  onClick={() => this.resetPassword()}
                 >
-                  Sign Up
+                  Reset
                 </button>
               </div>
-              <div>{this.state.error.message}</div>
-              <div><Link to={'/signin'}>Already a user? Sign in instead</Link></div>
+              <div>{(!this.state.reset)&&this.state.error.message}</div>
+              <div style={{color:"green"}}>{(this.state.reset)&&"password reset email has been sent"}</div>
+              <div><Link to={'/signin'}>Sign in instead</Link></div>
             </div>
         )
     }

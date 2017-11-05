@@ -26,7 +26,7 @@ class SignIn extends Component {
 
     render() {
         return (
-            <div className="form-inline">
+            <div className="form-inline" style={{margin:'10px'}}>
               <h2>Sign In</h2>
               <div className="form-group">
                 <input
@@ -51,6 +51,7 @@ class SignIn extends Component {
               </div>
               <div>{this.state.error.message}</div>
               <div><Link to={'/signup'}>Sign up instead</Link></div>
+              <div><Link to={'/forgot_password'}>Forgot your password?</Link></div>
             </div>
         )
     }

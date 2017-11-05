@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {completeTaskRef} from '../firebase';
 import {setCompleted} from '../actions';
 import {connect} from 'react-redux';
+import CompleteTaskItem from './CompleteTaskItem';
 
 
 class CompleteTaskList extends Component {
@@ -11,7 +12,8 @@ class CompleteTaskList extends Component {
       let completedTasks = [];
       snapshot.forEach(completedTask => {
         const {email, title} = completedTask.val();
-        completedTasks.push({email, title});
+        const serverKey = completedTask.key;
+        completedTasks.push({email, title, serverKey});
       })
       // console.log(completedTasks);
       this.props.setCompleted(completedTasks);
@@ -19,31 +21,26 @@ class CompleteTaskList extends Component {
     })
   }
 
-  clearCompleted() {
+  removeCompleted() {
     completeTaskRef.set([]);
   }
 
   render() {
-    console.log('this.props.completedTask', this.props.completedTasks);
+    // console.log('this.props.completedTask', this.props.completedTasks);
     return (
       <div>
         {
           this.props.completedTasks.map((completedTask, index) => {
-            const {title, email} = completedTask;
             return (
-              <div style={{margin: '10px'}} key={index}>
-                <strong>{title}</strong>
-                <span><em> ({email})</em></span>
-              </div>
+                <CompleteTaskItem key={index} completedTask={completedTask}/>
             )
           })
         }
         <button
-          style={{margin:'5px'}}
           className="btn btn-primary"
-          onClick={() => this.clearCompleted()}
+          onClick={() => this.removeCompleted()}
         >
-          Clear
+          Remove all
         </button>
       </div>
       )
