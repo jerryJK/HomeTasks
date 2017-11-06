@@ -7,20 +7,21 @@ class TaskItem extends Component {
 
   completeTask() {
     const {email} = this.props.user;
-    const {title, serverKey} = this.props.task;
+    const {title, type, serverKey} = this.props.task;
     // console.log('email', email, 'title',title);
     taskRef.child(serverKey).remove();
-    completeTaskRef.push({email, title});
+    completeTaskRef.push({email, title, type});
   }
 
 
   render() {
     // console.log('this.props.task', this.props.task);
-    const {title, email} = this.props.task;
+    const {title, email, type} = this.props.task;
     return (
       <div style={{margin:'10px'}}>
         <strong>{title}</strong>
         <span><em> ({email})</em></span>
+        <span style={{margin:'10px'}}className="bg-danger">{type}</span>
         <button
           style={{margin:'5px'}}
           className="btn btn-xs btn-primary"

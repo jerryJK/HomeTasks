@@ -6,14 +6,15 @@ class AddTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: ''
+      title: '',
+      type: 'shoppingList'
     }
   }
 
   addTask(){
-    const {title} = this.state;
+    const {title, type} = this.state;
     const {email} = this.props.user;
-    taskRef.push({email, title});
+    taskRef.push({email, title, type});
   }
 
   render() {
@@ -26,6 +27,16 @@ class AddTask extends Component {
             className="form-control"
             onChange={event => this.setState({title: event.target.value})}
           />
+          <select
+            value={this.state.type}
+            className="form-control"
+            onChange={event => this.setState({type: event.target.value})}
+            >
+            <option value="shoppingList">shopping list</option>
+            <option value="home">home</option>
+            <option value="school">school</option>
+            <option value="work">work</option>
+          </select>
           <button
             style={{margin:'5px'}}
             className="btn btn-success"

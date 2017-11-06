@@ -10,10 +10,22 @@ class TasksList extends Component {
     taskRef.on('value', snapshot => {
       let tasks = [];
       snapshot.forEach(task => {
-        const {email, title} = task.val();
+        const {email, title, type} = task.val();
         const serverKey = task.key;
-        tasks.push({email, title, serverKey});
+        tasks.push({email, title,type, serverKey});
       })
+      tasks.sort((a, b) => {
+        const genreA = a.type.toUpperCase();
+        const genreB = b.type.toUpperCase();
+
+        let comparison = 0;
+        if (genreA > genreB) {
+          comparison = 1;
+        } else if (genreA < genreB) {
+          comparison = -1;
+        }
+        return comparison;
+      });
       // console.log(tasks);
       this.props.setTasks(tasks);
     })
