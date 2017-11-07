@@ -11,9 +11,9 @@ class CompleteTaskList extends Component {
     completeTaskRef.on('value', snapshot => {
       let completedTasks = [];
       snapshot.forEach(completedTask => {
-        const {email, title} = completedTask.val();
+        const {email, title, type} = completedTask.val();
         const serverKey = completedTask.key;
-        completedTasks.push({email, title, serverKey});
+        completedTasks.push({email, title, type, serverKey});
       })
       // console.log(completedTasks);
       this.props.setCompleted(completedTasks);
@@ -21,12 +21,16 @@ class CompleteTaskList extends Component {
     })
   }
 
-  removeCompleted() {
+  removeTask() {
+    console.log('remove');
+  }
+
+  clearCompleted() {
     completeTaskRef.set([]);
   }
 
   render() {
-    // console.log('this.props.completedTask', this.props.completedTasks);
+    console.log('this.props.completedTask', this.props.completedTasks);
     return (
       <div>
         {
@@ -38,9 +42,9 @@ class CompleteTaskList extends Component {
         }
         <button
           className="btn btn-primary"
-          onClick={() => this.removeCompleted()}
+          onClick={() => this.clearCompleted()}
         >
-          Remove all
+          Remove All
         </button>
       </div>
       )

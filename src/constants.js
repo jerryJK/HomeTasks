@@ -1,3 +1,7 @@
 export const SIGNED_IN = 'SIGNED_IN';
-export const SET_TASKS = 'SET_TASKS';
+export const SET_SHOPPING_TASKS = 'SET_SHOPPING_TASKS';
+export const SET_SCHOOL_TASKS = 'SET_SCHOOL_TASKS';
+export const SET_HOME_TASKS = 'SET_HOME_TASKS';
+export const SET_WORK_TASKS = 'SET_WORK_TASKS';
+export const SET_OTHER_TASKS = 'SET_OTHER_TASKS';
 export const SET_COMPLETED = 'SET_COMPLETED';

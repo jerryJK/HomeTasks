@@ -11,6 +11,10 @@ import * as firebase from 'firebase';
   };
 
 
-export const firebaseApp = firebase.initializeApp(config);
-export const taskRef = firebase.database().ref('tasks');
-export const completeTaskRef = firebase.database().ref('completeTasks');
+  export const firebaseApp = firebase.initializeApp(config);
+  export const shoppingTaskRef = firebase.database().ref('shoppingTasks');
+  export const workTaskRef = firebase.database().ref('workTasks');
+  export const schoolTaskRef = firebase.database().ref('schoolTasks');
+  export const homeTaskRef = firebase.database().ref('homeTasks');
+  export const otherTaskRef = firebase.database().ref('otherTasks');
+  export const completeTaskRef = firebase.database().ref('completeTasks');
