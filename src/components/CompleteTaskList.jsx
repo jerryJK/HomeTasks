@@ -30,7 +30,7 @@ class CompleteTaskList extends Component {
   }
 
   render() {
-    console.log('this.props.completedTask', this.props.completedTasks);
+    //console.log('this.props.completedTask', this.props.completedTasks);
     return (
       <div>
         {

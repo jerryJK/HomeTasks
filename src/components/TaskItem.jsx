@@ -7,7 +7,7 @@ class TaskItem extends Component {
   completeTask() {
     const {email} = this.props.user;
     const {title, type, serverKey} = this.props.task;
-    console.log('email', email, 'title',title);
+    //console.log('email', email, 'title',title);
     this.props.taskRef.child(serverKey).remove();
     completeTaskRef.push({email, title, type});
   }

@@ -6,7 +6,6 @@ class CompleteTaskItem extends Component {
 
   removeCompletedTask() {
     const {serverKey} = this.props.completedTask;
-    console.log('this.props.completeTask', this.props.completedTask);
     completeTaskRef.child(serverKey).remove();
   }
 

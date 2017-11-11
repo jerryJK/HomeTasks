@@ -1,81 +1,77 @@
 import React, {Component} from 'react';
 import {firebaseApp} from '../firebase';
-import {shoppingTaskRef, homeTaskRef, schoolTaskRef, workTaskRef, otherTaskRef} from '../firebase';
-import {setShoppingTasks, setSchoolTasks, setHomeTasks, setWorkTasks, setOtherTasks} from '../actions';
+import {shoppingTaskRef, homeTaskRef, schoolTaskRef, workTaskRef, additionalListsRef} from '../firebase';
+import {setShoppingTasks, setSchoolTasks, setHomeTasks, setWorkTasks, setAdditionalLists} from '../actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import AddTask from './AddTask.jsx';
 import CompleteTaskList from './CompleteTaskList';
+import AdditionalTaskList from './AdditionalTaskList';
 import TaskList from './TaskList';
+
 
 
 class App extends Component {
 
+
   componentDidMount() {
 
-    shoppingTaskRef.on('value', snapshot => {
-      let shoppingTasks = [];
-      snapshot.forEach(shoppingTask => {
-        const {email, title, type} = shoppingTask.val();
-        const serverKey = shoppingTask.key;
-        shoppingTasks.push({email, title, type, serverKey});
-      })
-      this.props.setShoppingTasks(shoppingTasks);
-    })
 
-    schoolTaskRef.on('value', snapshot => {
-      let schoolTasks = [];
-      snapshot.forEach(schoolTask => {
-        const {email, title, type} = schoolTask.val();
-        const serverKey = schoolTask.key;
-        schoolTasks.push({email, title, type, serverKey});
-      })
-      this.props.setSchoolTasks(schoolTasks);
-    })
+    this.setDefaultList(shoppingTaskRef,this.props.setShoppingTasks);
+    this.setDefaultList(homeTaskRef,this.props.setHomeTasks);
+    this.setDefaultList(schoolTaskRef,this.props.setSchoolTasks);
+    this.setDefaultList(workTaskRef,this.props.setWorkTasks);
 
-    homeTaskRef.on('value', snapshot => {
-      let homeTasks = [];
-      snapshot.forEach(homeTask => {
-        const {email, title, type} = homeTask.val();
-        const serverKey = homeTask.key;
-        homeTasks.push({email, title, type, serverKey});
-      })
-      this.props.setHomeTasks(homeTasks);
-    })
 
-    workTaskRef.on('value', snapshot => {
-      let workTasks = [];
-      snapshot.forEach(workTask => {
-        const {email, title, type} = workTask.val();
-        const serverKey = workTask.key;
-        workTasks.push({email, title, type, serverKey});
-      })
-      this.props.setWorkTasks(workTasks);
-    })
-
-    otherTaskRef.on('value', snapshot => {
-      let otherTasks = [];
-      snapshot.forEach(otherTask => {
-        const {email, title, type} = otherTask.val();
-        const serverKey = otherTask.key;
-        otherTasks.push({email, title, type, serverKey});
-      })
-      this.props.setOtherTasks(otherTasks);
+    additionalListsRef.on('value', snapshot => {
+        let lists = [];
+        snapshot.forEach(list => {
+            if(list.val().tasks === undefined) {
+              lists.push({name:Object.values(list.val())[1], key: list.key});
+            } else {
+              let tasks = Object.values(list.val().tasks);
+              let keys = Object.keys(list.val().tasks);
+              tasks.forEach((elem,index) => {
+                  elem.key = keys[index];
+              })
+              lists.push({name:Object.values(list.val())[1], key: list.key, tasks:tasks});
+            }
+        })
+          this.props.setAdditionalLists(lists);
     })
 
   }
+
+
+
+  setDefaultList(ref, refAction) {
+    ref.on('value', snapshot => {
+      let tasks = [];
+      snapshot.forEach(task => {
+        const {email, title, type} = task.val();
+        const serverKey = task.key;
+        tasks.push({email, title, type, serverKey});
+      })
+      refAction(tasks);
+    })
+  }
+
 
   signOut() {
     firebaseApp.auth().signOut();
   }
 
-    render() {
-      //  console.log('this.props state', this.props.state);
+
+  render() {
+
+        //console.log('state.additionalLists', this.props.additionalLists);
+
         return (
-            <div className="app" style={{margin:'10px'}}>
-                <h3>Home Tasks</h3>
-                <br />
-                <AddTask />
+            <div className="container col-sm-6 col-sm-offset-3" >
+                <h2 className="title col-sm-8 col-sm-offset-2 text-center">Home Tasks</h2>
+                <div className="row">
+                  <AddTask />
+                </div>
                 <hr />
                 <div className="ShoppingTaskList">
                   <h4>Shopping List</h4>
@@ -97,11 +93,16 @@ class App extends Component {
                   <TaskList taskRef={workTaskRef} tasks={this.props.workTasks} />
                 </div>
                 <hr />
-                <div className="otherTaskList">
-                  <h4>Other</h4>
-                  <TaskList taskRef={otherTaskRef} tasks={this.props.otherTasks} />
-                </div>
-                <hr />
+                {this.props.additionalLists.map(elem => {
+                  return (
+                    <AdditionalTaskList
+                      key={elem.key}
+                      serverKey={elem.key}
+                      name={elem.name}
+                      tasks={elem.tasks}
+                    />
+                   )
+                })}
                 <h4>Completed Tasks</h4>
                 <CompleteTaskList />
                 <hr />
@@ -117,18 +118,19 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  const {shoppingTasks, schoolTasks, homeTasks, workTasks, otherTasks} = state;
+  const {shoppingTasks, schoolTasks, homeTasks, workTasks, additionalLists, user} = state;
   return {
     shoppingTasks,
     schoolTasks,
     homeTasks,
     workTasks,
-    otherTasks
+    additionalLists,
+    user
   }
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({setShoppingTasks, setSchoolTasks, setHomeTasks, setWorkTasks, setOtherTasks} ,dispatch)
+    return bindActionCreators({setShoppingTasks, setSchoolTasks, setHomeTasks, setWorkTasks, setAdditionalLists} ,dispatch)
 }
 
 

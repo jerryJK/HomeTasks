@@ -1,4 +1,4 @@
-import {SIGNED_IN, SET_SHOPPING_TASKS, SET_SCHOOL_TASKS, SET_HOME_TASKS, SET_WORK_TASKS, SET_OTHER_TASKS, SET_COMPLETED} from '../constants';
+import {SIGNED_IN, SET_SHOPPING_TASKS, SET_SCHOOL_TASKS, SET_HOME_TASKS, SET_WORK_TASKS, SET_ADDITIONAL_LISTS, SET_COMPLETED} from '../constants';
 
 export function logUser(email) {
   const action = {
@@ -42,13 +42,14 @@ export function setWorkTasks(workTasks){
   return action;
 }
 
-export function setOtherTasks(otherTasks){
+export function setAdditionalLists(additionalLists){
   const action = {
-    type: SET_OTHER_TASKS,
-    otherTasks
+    type: SET_ADDITIONAL_LISTS,
+    additionalLists
   }
   return action;
 }
+
 
 export function setCompleted(completedTasks){
   const action = {

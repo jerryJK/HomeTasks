@@ -16,5 +16,5 @@ import * as firebase from 'firebase';
   export const workTaskRef = firebase.database().ref('workTasks');
   export const schoolTaskRef = firebase.database().ref('schoolTasks');
   export const homeTaskRef = firebase.database().ref('homeTasks');
-  export const otherTaskRef = firebase.database().ref('otherTasks');
+  export const additionalListsRef = firebase.database().ref('additionalLists');
   export const completeTaskRef = firebase.database().ref('completeTasks');
