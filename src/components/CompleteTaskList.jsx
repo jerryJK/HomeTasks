@@ -41,6 +41,7 @@ class CompleteTaskList extends Component {
           })
         }
         <button
+          style={{marginTop:"10px"}}
           className="btn btn-primary"
           onClick={() => this.clearCompleted()}
         >

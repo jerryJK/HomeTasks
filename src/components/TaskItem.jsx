@@ -17,16 +17,19 @@ class TaskItem extends Component {
     const {title, email} = this.props.task;
 
     return (
-      <div style={{margin:'10px'}}>
+      <div style={{margin:'0 10px 0 10px',padding:"10px", backgroundColor:'white', borderBottom:"1px solid lightgrey"}} className="row panel">
         <strong>{title}</strong>
-        <span><em> ({email})</em></span>
-        <button
-          style={{margin:'5px'}}
-          className="btn btn-xs btn-primary"
-          onClick={() => this.completeTask()}
-        >
+        <div className="pull-right">
+          <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
+          <span style={{marginLeft:'5px'}}><em> ({email})</em></span>
+          <button
+            style={{marginLeft:'15px'}}
+            className="btn btn-xs btn-primary"
+            onClick={() => this.completeTask()}
+          >
           Complete
-        </button>
+          </button>
+        </div>
       </div>
     )
   }

@@ -8,8 +8,8 @@ class AdditionalTaskItem extends Component {
 
   completeItem(listName, taskName, taskKey) {
       const {email} = this.props.user;
-      let name = listName.split(" ")[1];
-      let type = listName.split(" ")[0];
+      let name = listName.split("|")[1];
+      let type = listName.split("|")[0];
       let title = taskName;
       firebase.database().ref('additionalLists/' + name + '/tasks/' + taskKey).remove();
       completeTaskRef.push({email, title, type});
@@ -19,16 +19,19 @@ class AdditionalTaskItem extends Component {
   render() {
 
     return (
-      <div key={this.props.task.key} style={{margin:'10px'}}>
+      <div key={this.props.task.key} style={{margin:'0 10px 0 10px',padding:"10px", backgroundColor:'white', borderBottom:"1px solid lightgrey"}} className="row panel">
         <strong>{this.props.task.title}</strong>
-        <span><em> ({this.props.task.email})</em></span>
-        <button
-          style={{margin:'5px'}}
-          className="btn btn-xs btn-primary"
-          onClick={() => this.completeItem(this.props.task.type, this.props.task.title, this.props.task.key)}
-        >
-          Complete
-        </button>
+        <div className="pull-right">
+          <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
+          <span style={{marginLeft:'5px'}}><em> ({this.props.task.email})</em></span>
+          <button
+            style={{marginLeft:'15px'}}
+            className="btn btn-xs btn-primary"
+            onClick={() => this.completeItem(this.props.task.type, this.props.task.title, this.props.task.key)}
+          >
+            Complete
+          </button>
+        </div>
       </div>
     )
   }

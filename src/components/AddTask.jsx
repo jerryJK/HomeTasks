@@ -33,7 +33,7 @@ class AddTask extends Component {
         return false;
     } else {
         this.props.additionalLists.forEach(elem => {
-           if(elem.name === this.state.type.split(" ")[0]) {
+           if(elem.name === this.state.type.split("|")[0]) {
              firebase.database().ref('additionalLists/' + key + "/tasks").push({email, title, type});
            } else {
              return false;
@@ -53,8 +53,8 @@ class AddTask extends Component {
   selectChange(event) {
     let key;
     this.setState({type: event.target.value})
-    if(event.target.value.split(" ").length > 1) {
-      key = event.target.value.split(" ")[1];
+    if(event.target.value.split("|").length > 1) {
+      key = event.target.value.split("|")[1];
       this.setState({key})
     } else {
       this.setState({key: ''})
@@ -84,7 +84,7 @@ class AddTask extends Component {
             <option value="school" >school</option>
             <option value="work" >work</option>
             {this.props.additionalLists.map(elem => {
-                return <option value={elem.name + " " +elem.key} key={elem.key}>{elem.name}</option>
+                return <option value={elem.name + "|" +elem.key} key={elem.key}>{elem.name}</option>
             })}
           </select>
           <button

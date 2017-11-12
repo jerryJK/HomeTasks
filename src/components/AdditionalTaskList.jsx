@@ -16,12 +16,18 @@ class AdditionalTaskList extends Component {
     return (
       <div key={this.props.key}>
         <h4>{this.props.name}</h4>
-        <button onClick={() => this.deleteList(this.props.serverKey)}>remove list</button>
-          {this.props.tasks&&this.props.tasks.map(task => {
+        {this.props.tasks&&this.props.tasks.map(task => {
               return (
                 <AdditionalTaskItem key={task.key} task={task}/>
               )
-          })}
+        })}
+        <button
+          style={{marginTop: "5px"}}
+          className="btn btn-danger btn-xs"
+          onClick={() => this.deleteList(this.props.serverKey)}
+        >
+          remove list
+        </button>
         <hr />
       </div>
       )
