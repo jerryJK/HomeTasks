@@ -11,34 +11,45 @@ class AddTask extends Component {
       title: '',
       type: 'list type',
       listTitle: '',
-      key: ''
+      key: '',
+      taskNameValid: true,
+      listNameValid: true
     }
   }
 
-
-  addTask(){
+  addTask() {
     const {title, type, key} = this.state;
     const {email} = this.props.user;
 
+    if (title.length !== 0) {
 
-    if(type === 'school'){
-        schoolTaskRef.push({email, title, type});
-    } else if(type === 'home') {
-        homeTaskRef.push({email, title, type});
-    } else if(type === 'work') {
-        workTaskRef.push({email, title, type});
-    } else if(type === 'shoppingList') {
-        shoppingTaskRef.push({email, title, type});
-    } else if(type === 'list type') {
-        return false;
+      this.setState({
+        taskNameValid: true
+      })
+
+        if (type === 'school') {
+            schoolTaskRef.push({email, title, type});
+        } else if (type === 'home') {
+            homeTaskRef.push({email, title, type});
+        } else if (type === 'work') {
+            workTaskRef.push({email, title, type});
+        } else if (type === 'shoppingList') {
+            shoppingTaskRef.push({email, title, type});
+        } else if (type === 'list type') {
+            return false;
+        } else {
+            this.props.additionalLists.forEach(elem => {
+                if (elem.name === this.state.type.split("|")[0]) {
+                    firebase.database().ref('additionalLists/' + key + "/tasks").push({email, title, type});
+                } else {
+                    return false;
+                }
+            })
+        }
     } else {
-        this.props.additionalLists.forEach(elem => {
-           if(elem.name === this.state.type.split("|")[0]) {
-             firebase.database().ref('additionalLists/' + key + "/tasks").push({email, title, type});
-           } else {
-             return false;
-           }
-        })
+      this.setState({
+        taskNameValid: false
+      })
     }
 
   }
@@ -46,7 +57,17 @@ class AddTask extends Component {
 
   addList() {
     let id = Math.ceil(Math.random()*100000);
-    additionalListsRef.push({name:this.state.listTitle, id});
+
+    if (this.state.listTitle.length !== 0) {
+      additionalListsRef.push({name:this.state.listTitle, id});
+      this.setState({
+        listNameValid: true
+      })
+    } else {
+      this.setState({
+        listNameValid: false
+      })
+    }
 
   }
 
@@ -68,6 +89,7 @@ class AddTask extends Component {
       <div className="form-inline col-sm-10 col-sm-offset-1 text-center">
         <div className="form-group">
           <input
+            style={{borderColor:`${!this.state.taskNameValid?"red":""}`}}
             type="text"
             placeholder="Task name"
             className="form-control"
@@ -96,6 +118,7 @@ class AddTask extends Component {
             Add Task
           </button>
           <input
+            style={{borderColor:`${!this.state.listNameValid?"red":""}`}}
             type="text"
             placeholder="List name"
             className="form-control"

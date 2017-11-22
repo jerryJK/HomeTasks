@@ -13,8 +13,9 @@ class CompleteTaskItem extends Component {
   render() {
     // console.log('this.props.task', this.props.task);
     const {title, email, type} = this.props.completedTask;
+    
     return (
-      <div style={{margin:'0 10px 0 10px',padding:"10px", backgroundColor:'white', borderBottom:"1px solid lightgrey"}} className="row panel">
+      <li className="list-group-item">
         <strong>{title}</strong>
         <div className="pull-right">
           <span>{type} |</span>
@@ -29,7 +30,7 @@ class CompleteTaskItem extends Component {
           Remove
           </button>
         </div>
-      </div>
+      </li>
     )
   }
 }

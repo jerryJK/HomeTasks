@@ -33,13 +33,15 @@ class CompleteTaskList extends Component {
     //console.log('this.props.completedTask', this.props.completedTasks);
     return (
       <div>
-        {
-          this.props.completedTasks.map((completedTask, index) => {
-            return (
-                <CompleteTaskItem key={index} completedTask={completedTask}/>
-            )
-          })
-        }
+        <ul className="list-group" >
+          {
+            this.props.completedTasks.map((completedTask, index) => {
+              return (
+                  <CompleteTaskItem key={index} completedTask={completedTask}/>
+              )
+            })
+          }
+        </ul>
         <button
           style={{marginTop:"10px"}}
           className="btn btn-primary"

@@ -68,10 +68,11 @@ class App extends Component {
 
         return (
             <div className="container col-sm-6 col-sm-offset-3" >
-                <h2 className="title col-sm-8 col-sm-offset-2 text-center">Home Tasks</h2>
-                <div className="row">
+                <h2 className="title col-sm-8 col-sm-offset-2 text-center font-weight-bold"><b>Home Tasks</b></h2>
+                <div className="row" style={{marginBottom: "30px"}}>
                   <AddTask />
                 </div>
+                <h4><b>Lists</b></h4>
                 <hr />
                 <div className="ShoppingTaskList">
                   <h4>Shopping List</h4>
@@ -103,7 +104,7 @@ class App extends Component {
                     />
                    )
                 })}
-                <h4>Completed Tasks</h4>
+                <h4><b>Completed Tasks</b></h4>
                 <CompleteTaskList />
                 <hr />
                 <button

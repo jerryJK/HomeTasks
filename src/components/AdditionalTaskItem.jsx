@@ -19,7 +19,7 @@ class AdditionalTaskItem extends Component {
   render() {
 
     return (
-      <div key={this.props.task.key} style={{margin:'0 10px 0 10px',padding:"10px", backgroundColor:'white', borderBottom:"1px solid lightgrey"}} className="row panel">
+      <li className="list-group-item">
         <strong>{this.props.task.title}</strong>
         <div className="pull-right">
           <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -32,7 +32,7 @@ class AdditionalTaskItem extends Component {
             Complete
           </button>
         </div>
-      </div>
+      </li>
     )
   }
 }

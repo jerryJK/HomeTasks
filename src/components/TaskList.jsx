@@ -7,7 +7,7 @@ class TaskList extends Component {
 
   render() {
     return (
-      <div>
+      <ul className="list-group">
         {
           this.props.tasks.map((task, index) => {
             return (
@@ -15,7 +15,7 @@ class TaskList extends Component {
             )
           })
         }
-        </div>
+      </ul>
       )
   }
 }

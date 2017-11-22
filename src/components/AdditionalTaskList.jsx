@@ -16,11 +16,13 @@ class AdditionalTaskList extends Component {
     return (
       <div key={this.props.key}>
         <h4>{this.props.name}</h4>
-        {this.props.tasks&&this.props.tasks.map(task => {
-              return (
-                <AdditionalTaskItem key={task.key} task={task}/>
-              )
-        })}
+        <ul className="list-group">
+          {this.props.tasks&&this.props.tasks.map(task => {
+                return (
+                  <AdditionalTaskItem key={task.key} task={task}/>
+                )
+          })}
+        </ul>
         <button
           style={{marginTop: "5px"}}
           className="btn btn-danger btn-xs"
