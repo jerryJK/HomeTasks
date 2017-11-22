@@ -107,6 +107,7 @@ class App extends Component {
                 <CompleteTaskList />
                 <hr />
                 <button
+                  style={{marginBottom: '20px'}}
                   className="btn btn-danger"
                   onClick={() => this.signOut()}
                 >
