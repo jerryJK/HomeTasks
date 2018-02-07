@@ -86,7 +86,7 @@ class AddTask extends Component {
   render() {
 
     return (
-      <div className="form-inline col-sm-10 col-sm-offset-1 text-center">
+      <div className="form-inline text-center">
         <div className="form-group">
           <input
             style={{borderColor:`${!this.state.taskNameValid?"red":""}`}}

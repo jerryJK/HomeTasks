@@ -16,9 +16,9 @@ class TaskItem extends Component {
     const {title, email} = this.props.task;
 
     return (
-      <li className="list-group-item">
-        <strong>{title}</strong>
-        <div className="pull-right">
+      <li className="list-group-item d-flex">
+        <div><strong>{title}</strong></div>
+        <div>
             <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
             <span style={{marginLeft:'5px'}}><em> ({email})</em></span>
             <button

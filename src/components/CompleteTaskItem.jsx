@@ -13,11 +13,11 @@ class CompleteTaskItem extends Component {
   render() {
     // console.log('this.props.task', this.props.task);
     const {title, email, type} = this.props.completedTask;
-    
+
     return (
-      <li className="list-group-item">
-        <strong>{title}</strong>
-        <div className="pull-right">
+      <li className="list-group-item d-flex">
+        <div><strong>{title}</strong></div>
+        <div>
           <span>{type} |</span>
           <span style={{marginLeft:'5px'}}><em>done by</em></span>
           <span style={{marginLeft:'5px'}} className="glyphicon glyphicon-user" aria-hidden="true"></span>

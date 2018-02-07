@@ -28,11 +28,11 @@ class SignUp extends Component {
 
     render() {
         return (
-            <div className="form-inline" style={{
+            <div className="form" style={{
                 margin: '10px'
             }}>
                 <h2>Reset password</h2>
-                <div className="form-group">
+                <div className="form-inline">
                     <input
                       className="form-control"
                       type="text"

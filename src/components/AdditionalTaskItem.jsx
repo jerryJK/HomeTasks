@@ -19,14 +19,14 @@ class AdditionalTaskItem extends Component {
   render() {
 
     return (
-      <li className="list-group-item">
-        <strong>{this.props.task.title}</strong>
-        <div className="pull-right">
+      <li className="list-group-item d-flex">
+        <div><strong>{this.props.task.title}</strong></div>
+        <div>
           <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
           <span style={{marginLeft:'5px'}}><em> ({this.props.task.email})</em></span>
           <button
             style={{marginLeft:'15px'}}
-            className="btn btn-xs btn-primary"
+            className="btn btn-sm btn-primary"
             onClick={() => this.completeItem(this.props.task.type, this.props.task.title, this.props.task.key)}
           >
             Complete

@@ -2,3 +2,9 @@ body {
   background-color: lightgrey;
   background-image: url('/img/background.jpg')
 }
+
+
+.list-group-item {
+  justify-content: space-between;
+  align-items: center;
+}
