@@ -25,7 +25,7 @@ class AdditionalTaskList extends Component {
         </ul>
         <button
           style={{marginTop: "5px"}}
-          className="btn btn-danger btn-xs"
+          className="btn btn-danger btn-sm"
           onClick={() => this.deleteList(this.props.serverKey)}
         >
           remove list

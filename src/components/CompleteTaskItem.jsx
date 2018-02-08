@@ -15,7 +15,7 @@ class CompleteTaskItem extends Component {
     const {title, email, type} = this.props.completedTask;
 
     return (
-      <li className="list-group-item d-flex">
+      <li className="list-group-item d-flex justify-content-between align-items-center">
         <div><strong>{title}</strong></div>
         <div>
           <span>{type} |</span>

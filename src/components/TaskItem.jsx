@@ -16,7 +16,7 @@ class TaskItem extends Component {
     const {title, email} = this.props.task;
 
     return (
-      <li className="list-group-item d-flex">
+      <li className="list-group-item d-flex justify-content-between align-items-center">
         <div><strong>{title}</strong></div>
         <div>
             <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
